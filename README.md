@@ -1,6 +1,6 @@
 # grunt-hoodie
 
-> Start hoodie and delay grunting till it is ready.
+> Start hoodie and delay grunting till it is ready. Triggers a callback with hosts and ports of couchDB, www and pocket.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -25,65 +25,68 @@ In your project's Gruntfile, add a section named `hoodie` to the data object pas
 ```js
 grunt.initConfig({
   hoodie: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    start: {
+      options: {
+        callback: function(stack) {
+          // Do something with the stack information from data/stack.json.
+          // For example, set the proxy:
+          // grunt.config.set('connect.proxies.0.port', stack.www.port);
+        }
+      }
+    }
   },
 })
 ```
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.callback
 
-A string value that is used to do something with whatever.
+Type: `Function`
+Default value: `function(stack) {}`
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+A callback that is called when hoodie is up and running. Has one param called `stack` which contains the host and port information from `data/stack.json`
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+
+In this example, the proxy port for the `/_api` of hoodie is set after hoodie started.
 
 ```js
 grunt.initConfig({
   hoodie: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    start: {
+      options: {
+        callback: function(stack) {
+          grunt.config.set('connect.proxies.0.port', stack.www.port);
+        }
+      }
+    }
   },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  hoodie: {
+  connect: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      port: 9000,
+      hostname: 'localhost'
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    proxies: [
+      {
+        context: '/_api',
+        host: 'localhost',
+        port: false,
+        https: false,
+        changeOrigin: false
+      }
+    ],
+    …
   },
 })
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+Take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+0.1.0 Initial release
