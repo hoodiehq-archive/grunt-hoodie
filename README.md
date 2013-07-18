@@ -47,9 +47,7 @@ Default value: `function(stack) {}`
 
 A callback that is called when hoodie is up and running. Has one param called `stack` which contains the host and port information from `data/stack.json`
 
-### Usage Examples
-
-#### Default Options
+### Usage Example
 
 In this example, the proxy port for the `/_api` of hoodie is set after hoodie started.
 
