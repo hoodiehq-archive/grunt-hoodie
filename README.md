@@ -31,7 +31,7 @@ grunt.initConfig({
       options: {
         callback: function(stack) {
           // Do something with the stack information from data/stack.json.
-          // For example, set the proxy:
+          // For example, set the port of grunt-connect-proxy:
           // grunt.config.set('connect.proxies.0.port', stack.www.port);
         }
       }
