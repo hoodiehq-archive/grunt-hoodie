@@ -62,6 +62,9 @@ module.exports = function(grunt) {
         console.log('exec error: ' + error);
       }
     });
+    
+    hoodieProcess.stdout.pipe(process.stdout);
+    hoodieProcess.stderr.pipe(process.stderr);
 
     setTicker(checkForStackFile, 100);
   });
