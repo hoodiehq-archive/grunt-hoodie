@@ -51,7 +51,7 @@ A callback that is called when hoodie is up and running. Has one param called `s
 
 ### Usage Example
 
-In this example, the proxy port for the `/_api` of hoodie is set after hoodie started.
+In this example, the port of [grunt-connect-proxy](https://npmjs.org/package/grunt-connect-proxy) for the `/_api` of hoodie is set after hoodie started.
 
 ```js
 grunt.initConfig({
