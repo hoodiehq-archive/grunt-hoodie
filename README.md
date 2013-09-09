@@ -1,6 +1,6 @@
 # grunt-hoodie
 
-[![NPM version](https://badge.fury.io/js/grunt-hoodie.png)](http://badge.fury.io/js/grunt-hoodie)
+[![NPM version](https://badge.fury.io/js/grunt-hoodie.png)](http://badge.fury.io/js/grunt-hoodie) [![Dependency Status](https://gemnasium.com/ro-ka/grunt-hoodie.png)](https://gemnasium.com/ro-ka/grunt-hoodie)
 
 > Start hoodie and delay grunting till it is ready. Triggers a callback with hosts and ports of couchDB, www and pocket.
 
