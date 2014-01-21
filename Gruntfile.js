@@ -20,7 +20,19 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc',
       }
-    }
+    },
+    hoodie: {
+      start: {
+        options: {
+          callback: function(stack) {
+            // Do something with the stack information from data/stack.json.
+            // For example, set the port of grunt-connect-proxy:
+            // grunt.config.set('connect.proxies.0.port', stack.www.port);
+          }
+        }
+      }
+    },
+
   });
 
   // Actually load this plugin's task(s).
