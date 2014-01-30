@@ -6,10 +6,9 @@
  * Licensed under the MIT license.
  */
 
-
-var fs = require('fs');
-var path = require('path');
-var fork = require('child_process').fork;
+var fs = require('fs'),
+  path = require('path'),
+  fork = require('child_process').fork;
 
 module.exports = function(grunt) {
 
@@ -20,10 +19,9 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('hoodie', 'Start hoodie and delay grunting till it is ready.', function() {
     var options = this.options({
-      callback: function() {}
-    });
-
-    var done = this.async();
+        callback: function() {}
+      }),
+      done = this.async();
 
     fork([path.resolve('node_modules/hoodie-server/bin/start')]).on('message', function (msg) {
       options.callback(msg);
