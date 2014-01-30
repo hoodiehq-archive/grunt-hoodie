@@ -29,8 +29,7 @@ grunt.initConfig({
   hoodie: {
     start: {
       options: {
-        callback: function(stack) {
-          // Do something with the stack information from data/stack.json.
+        callback: function (stack) {
           // For example, set the port of grunt-connect-proxy:
           // grunt.config.set('connect.proxies.0.port', stack.www.port);
         }
@@ -47,7 +46,7 @@ grunt.initConfig({
 Type: `Function`
 Default value: `function(stack) {}`
 
-A callback that is called when hoodie is up and running. Has one param called `stack` which contains the host and port information from `data/stack.json`
+A callback that is called when hoodie is up and running. Has one param called `stack` which contains the host and port information.
 
 ### Usage Example
 
@@ -58,8 +57,8 @@ grunt.initConfig({
   hoodie: {
     start: {
       options: {
-        callback: function(stack) {
-          grunt.config.set('connect.proxies.0.port', stack.www.port);
+        callback: function(config) {
+          grunt.config.set('connect.proxies.0.port', config.stack.www.port);
         }
       }
     }

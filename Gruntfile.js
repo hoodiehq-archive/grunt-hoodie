@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    
     jshint: {
       all: [
         'Gruntfile.js',
@@ -20,7 +21,18 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc',
       }
+    },
+    
+    hoodie: {
+      start: {
+        options: {
+          callback: function(config) {
+            grunt.config.set('connect.proxies.0.port', config.stack.www.port);
+          }
+        }
+      }
     }
+
   });
 
   // Actually load this plugin's task(s).
