@@ -57,8 +57,8 @@ grunt.initConfig({
   hoodie: {
     start: {
       options: {
-        callback: function(stack) {
-          grunt.config.set('connect.proxies.0.port', stack.www.port);
+        callback: function(config) {
+          grunt.config.set('connect.proxies.0.port', config.stack.www.port);
         }
       }
     }
