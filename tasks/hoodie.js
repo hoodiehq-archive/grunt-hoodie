@@ -8,7 +8,6 @@
 
 
 var fs = require('fs');
-var util = require('util');
 var path = require('path');
 var fork = require('child_process').fork;
 
