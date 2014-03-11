@@ -82,6 +82,11 @@ grunt.initConfig({
 })
 ```
 
+## The "hoodie\_stop" task
+
+This will stop any Hoodie servers started by the 'hoodie' task. No config
+is required.
+
 ## Contributing
 
 Take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
