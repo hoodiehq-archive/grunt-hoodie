@@ -93,6 +93,7 @@ Take care to maintain the existing coding style. Add unit tests for any new or c
 
 ## Release History
 
+0.3.0 Added stop task
 0.2.1 Updated dev dependencies
 0.2.0 Updated to work with new hoodie version
 0.1.0 Initial release
