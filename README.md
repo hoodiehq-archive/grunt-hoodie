@@ -29,9 +29,9 @@ grunt.initConfig({
   hoodie: {
     start: {
       options: {
-        callback: function (stack) {
+        callback: function (config) {
           // For example, set the port of grunt-connect-proxy:
-          // grunt.config.set('connect.proxies.0.port', stack.www.port);
+          // grunt.config.set('connect.proxies.0.port', config.stack.www.port);
         }
       }
     }
@@ -44,9 +44,9 @@ grunt.initConfig({
 #### options.callback
 
 Type: `Function`
-Default value: `function(stack) {}`
+Default value: `function(config) {}`
 
-A callback that is called when hoodie is up and running. Has one param called `stack` which contains the host and port information.
+A callback that is called when hoodie is up and running. Has one param called `config` which contains the host and port information.
 
 ### Usage Example
 
