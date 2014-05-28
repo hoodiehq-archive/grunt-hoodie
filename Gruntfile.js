@@ -12,7 +12,6 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    
     jshint: {
       all: [
         'Gruntfile.js',
@@ -22,7 +21,6 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc',
       }
     },
-    
     hoodie: {
       start: {
         options: {
@@ -32,7 +30,6 @@ module.exports = function(grunt) {
         }
       }
     }
-
   });
 
   // Actually load this plugin's task(s).
