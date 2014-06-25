@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-jshint": "~0.10.0",
     "grunt-release": "^0.7.0"
   },
   "peerDependencies": {
@@ -41,5 +41,8 @@
     "grunt",
     "hoodie",
     "nobackend"
-  ]
+  ],
+  "dependencies": {
+    "tree-kill": "0.0.6"
+  }
 }
