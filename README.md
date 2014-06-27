@@ -34,9 +34,20 @@ grunt.initConfig({
           // grunt.config.set('connect.proxies.0.port', config.stack.www.port);
         }
       }
-    }
+    },
+    stop: {}
   },
-})
+});
+
+// Imagine you have a task `e2e` that runs end to end tests and needs hoodie
+// server to be running.
+grunt.registerTask('run_e2e', [ 'hoodie:start', 'e2e', 'hoodie:stop' ]);
+```
+
+So you can:
+
+```
+$ grunt run_e2e
 ```
 
 ### Options
@@ -82,10 +93,50 @@ grunt.initConfig({
 })
 ```
 
-## The "hoodie\_stop" task
+In this other example we start the hoodie server, send an HTTP request to get
+the combined javascript and put it in a file. This can be useful as part of a
+build process.
 
-This will stop any Hoodie servers started by the 'hoodie' task. No config
-is required.
+```js
+grunt.initConfig({
+  hoodie: {
+    start: {
+      options: {
+        callback: function (config) {
+          grunt.config.set('hoodiejs.options.port', config.stack.www.port);
+        }
+      }
+    },
+    stop: {}
+  },
+});
+
+grunt.registerTask('hoodiejs', function () {
+  // Dependens on successful execution of hoodie:start. Note that
+  // grunt.task.requires won't actually RUN the other task(s). It'll just check
+  // to see that it has run and not failed.
+  grunt.task.requires('hoodie:start');
+
+  var done = this.async();
+  var options = this.options();
+  var url = 'http://localhost:' + options.port + '/_api/_files/hoodie.js';
+  http.get(url, function (res) {
+    var fname = path.join(__dirname, 'some/path/hoodie.js');
+    res.pipe(fs.createWriteStream(fname)).on('finish', function () {
+      done();
+    });
+  }).on('error', function (err) {
+    grunt.log.error(err);
+    done(false);
+  });
+});
+```
+
+So you should now be able to run:
+
+```
+$ grunt hoodie:start hoodiejs
+```
 
 ## Contributing
 
