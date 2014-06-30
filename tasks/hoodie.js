@@ -6,50 +6,98 @@
  * Licensed under the MIT license.
  */
 
-var fs = require('fs'),
-  path = require('path'),
-  fork = require('child_process').fork;
+var fs = require('fs');
+var path = require('path');
+var fork = require('child_process').fork;
+var kill = require('tree-kill');
 
-module.exports = function(grunt) {
+// hoodie server start script.
+var bin = path.resolve('node_modules/hoodie-server/bin/start');
+
+module.exports = function (grunt) {
 
   'use strict';
 
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  var servers = [];
+  // This task only starts a single hoodie server. We will keep a reference to
+  // the child process here.
+  var child;
 
-  grunt.registerMultiTask('hoodie', 'Start hoodie and delay grunting till it is ready.', function () {
-    var options = this.options({
-        callback: function() {}
-      }),
-      done = this.async();
+  // Flag indicating whether we are already in the process of killing the child.
+  var killed;
 
+  // Kill child process (hoodie server)
+  function killChild() {
+    if (!child || killed) { return; }
+    killed = true;
+    kill(child, 'SIGTERM');
+    grunt.log.ok('Killed ' + child.name + '.');
+  }
+
+  // Kill parent process, but killing hoodie server's child process first.
+  function killParent() {
+    killChild();
+    process.exit(0);
+  }
+
+  // Intercept parent process' events.
+  process.once('SIGINT', killParent);
+  process.once('SIGTERM', killParent);
+  process.once('uncaughtException', function (err) {
+    killChild();
+    throw err;
+  });
+
+  // Start the hoodie server.
+  function start(options, done) {
     var args = [];
     if (options.www) {
-      args = ['--www', options.www];
+      args = [ '--www', options.www ];
     }
 
-    var bin = path.resolve('node_modules/hoodie-server/bin/start');
-    var child = fork(bin, args);
+    child = fork(bin, args, { silent: true });
+    child.name = 'hoodie (pid: ' + child.pid + ')';
 
-    child.on('message', function (msg) {
+    child.once('message', function (msg) {
       options.callback(msg);
-      console.log('hoodie is ready!');
+      grunt.log.ok(child.name + ' is ready!');
       done();
     });
 
-    // keep a reference so we can kill it
-    servers.push(child);
-
-  });
-
-  grunt.registerTask('hoodie_stop', 'Stop all hoodie servers.', function () {
-    servers.forEach(function (server) {
-      server.kill();
+    child.once('error', function (err) {
+      grunt.log.error(err);
     });
-  });
+    child.once('exit', function (code, signal) {
+      grunt.log.warn(child.name + ' exited. Code: ' + code + ' / Signal: ' + signal);
+    });
+    child.stderr.on('data', function (buf) {
+      grunt.log.error(buf);
+    });
+  }
 
-  grunt.registerTask('hoodie_start', ['hoodie']);
+  // Stop the hoodie server.
+  function stop(options, done) {
+    killChild();
+    done();
+  }
+
+  grunt.registerMultiTask('hoodie', 'Start/stop hoodie.', function () {
+    var done = this.async();
+    var options = this.options({ callback: function () {} });
+
+    switch (this.target) {
+      case 'start':
+        start(options, done);
+        break;
+      case 'stop':
+        stop(options, done);
+        break;
+      default:
+        grunt.log.error('Unkown target! It must be either "start" or "stop".');
+        return done(false);
+    }
+  });
 
 };
