@@ -32,7 +32,7 @@ module.exports = function (grunt) {
   function killChild() {
     if (!child || killed) { return; }
     killed = true;
-    kill(child, 'SIGTERM');
+    kill(child.pid, 'SIGTERM');
     grunt.log.ok('Killed ' + child.name + '.');
   }
 
