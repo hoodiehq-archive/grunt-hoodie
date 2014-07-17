@@ -92,7 +92,7 @@ module.exports = function (grunt) {
       childProcessOptions: {
         silent: true
       }
-     });
+    });
 
     switch (this.target) {
       case 'start':
