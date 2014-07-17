@@ -12,7 +12,7 @@ var fork = require('child_process').fork;
 var kill = require('tree-kill');
 
 // hoodie server start script.
-var bin = path.resolve('node_modules/hoodie-server/bin/start');
+var bin = 'node_modules/hoodie-server/bin/start';
 
 module.exports = function (grunt) {
 
@@ -57,7 +57,7 @@ module.exports = function (grunt) {
       args = [ '--www', options.www ];
     }
 
-    child = fork(bin, args, { silent: true });
+    child = fork(bin, args, options.childProcessOptions);
     child.name = 'hoodie (pid: ' + child.pid + ')';
 
     child.once('message', function (msg) {
@@ -72,9 +72,11 @@ module.exports = function (grunt) {
     child.once('exit', function (code, signal) {
       grunt.log.warn(child.name + ' exited. Code: ' + code + ' / Signal: ' + signal);
     });
-    child.stderr.on('data', function (buf) {
-      grunt.log.error(buf);
-    });
+    if (child.stderr) {
+      child.stderr.on('data', function (buf) {
+        grunt.log.error(buf);
+      });
+    }
   }
 
   // Stop the hoodie server.
@@ -85,7 +87,12 @@ module.exports = function (grunt) {
 
   grunt.registerMultiTask('hoodie', 'Start/stop hoodie.', function () {
     var done = this.async();
-    var options = this.options({ callback: function () {} });
+    var options = this.options({
+      callback: function () {},
+      childProcessOptions: {
+        silent: true
+      }
+     });
 
     switch (this.target) {
       case 'start':
