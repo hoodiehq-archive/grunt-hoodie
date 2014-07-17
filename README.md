@@ -59,6 +59,27 @@ Default value: `function(config) {}`
 
 A callback that is called when hoodie is up and running. Has one param called `config` which contains the host and port information.
 
+#### options.childProcessOptions
+
+Type: `Object`
+Default value: `{silent: true}`
+
+Allows to pass options to the childProcess.fork where hoodie runs.
+
+```js
+hoodie: {
+  start: {
+    options: {
+      childProcessOptions: {
+        cwd: process.cwd() + '/myapp',
+        env: env
+      }
+    }
+  },
+  stop: {}
+}
+```
+
 ### Usage Example
 
 In this example, the port of [grunt-connect-proxy](https://npmjs.org/package/grunt-connect-proxy) for the `/_api` of hoodie is set after hoodie started.
