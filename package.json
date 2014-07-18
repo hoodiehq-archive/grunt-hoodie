@@ -1,7 +1,7 @@
 {
   "name": "grunt-hoodie",
   "description": "Start hoodie and delay grunting till it is ready.",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/hoodiehq/grunt-hoodie",
   "author": {
     "name": "Robert Katzki",
