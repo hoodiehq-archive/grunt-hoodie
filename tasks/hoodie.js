@@ -14,6 +14,15 @@ var kill = require('tree-kill');
 // hoodie server start script.
 var bin = 'node_modules/hoodie-server/bin/start';
 
+// hoodie command line options
+var hoodieOptions = [
+  'www',
+  'local-tld',
+  'no-local-tld',
+  'custom-ports',
+  'help'
+];
+
 module.exports = function (grunt) {
 
   'use strict';
@@ -53,9 +62,13 @@ module.exports = function (grunt) {
   // Start the hoodie server.
   function start(options, done) {
     var args = [];
-    if (options.www) {
-      args = [ '--www', options.www ];
-    }
+
+    hoodieOptions.forEach(function(option) {
+      if (options[option]) {
+        args.push('--' + option);
+        args.push(options[option]);
+      }
+    });
 
     child = fork(bin, args, options.childProcessOptions);
     child.name = 'hoodie (pid: ' + child.pid + ')';
