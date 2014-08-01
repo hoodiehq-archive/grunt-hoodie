@@ -6,8 +6,6 @@
  * Licensed under the MIT license.
  */
 
-var fs = require('fs');
-var path = require('path');
 var fork = require('child_process').fork;
 var kill = require('tree-kill');
 
