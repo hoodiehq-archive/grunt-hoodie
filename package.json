@@ -23,26 +23,23 @@
   ],
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt ci --verbose"
+  },
+  "dependencies": {
+    "tree-kill": "0.0.6"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-release": "^0.7.0"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-release-hoodie": "^2.0.1"
   },
   "keywords": [
     "gruntplugin",
     "grunt",
     "hoodie",
     "nobackend"
-  ],
-  "dependencies": {
-    "tree-kill": "0.0.6"
-  }
+  ]
 }

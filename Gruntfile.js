@@ -29,6 +29,14 @@ module.exports = function(grunt) {
           }
         }
       }
+    },
+    release: {
+      options: {
+        bump: {
+          files: ['package.json'],
+          commitFiles: ['package.json', 'CHANGELOG.md']
+        }
+      }
     }
   });
 
@@ -37,8 +45,9 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-release');
+  grunt.loadNpmTasks('grunt-release-hoodie');
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('ci', ['default', 'integration-test']);
 };
