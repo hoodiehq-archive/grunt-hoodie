@@ -164,10 +164,3 @@ $ grunt hoodie:start hoodiejs
 ## Contributing
 
 Take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-
-0.3.0 Added stop task
-0.2.1 Updated dev dependencies
-0.2.0 Updated to work with new hoodie version
-0.1.0 Initial release
