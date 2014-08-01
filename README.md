@@ -1,6 +1,8 @@
 # grunt-hoodie
 [![Build Status](https://travis-ci.org/hoodiehq/grunt-hoodie.svg)](https://travis-ci.org/hoodiehq/grunt-hoodie)
-[![NPM version](https://badge.fury.io/js/grunt-hoodie.png)](http://badge.fury.io/js/grunt-hoodie)
+[![NPM version](https://badge.fury.io/js/grunt-hoodie.svg)](http://badge.fury.io/js/grunt-hoodie)
+[![Dependency Status](https://david-dm.org/hoodiehq/grunt-hoodie.svg)](https://david-dm.org/hoodiehq/grunt-hoodie)
+[![devDependency Status](https://david-dm.org/hoodiehq/grunt-hoodie/dev-status.svg)](https://david-dm.org/hoodiehq/grunt-hoodie#info=devDependencies)
 
 > Start hoodie and delay grunting till it is ready. Triggers a callback with hosts and ports of couchDB, www and pocket.
 
