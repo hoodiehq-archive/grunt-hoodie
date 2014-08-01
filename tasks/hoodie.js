@@ -30,6 +30,22 @@ module.exports = function (grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
+  // When grunt runs with the verbose flag all task options are logged.
+  // The env object might contain passwords in plain text,
+  // which is why we prevent them from being logged.
+  var writeflags = grunt.verbose.writeflags;
+  grunt.verbose.writeflags = function() {
+    var env;
+    if (arguments[0].childProcessOptions && arguments[0].childProcessOptions.env) {
+      env = arguments[0].childProcessOptions.env;
+      arguments[0].childProcessOptions.env = 'Refusing to log `env`.';
+    }
+    writeflags.apply(grunt.verbose, arguments);
+    if (env) {
+      arguments[0].childProcessOptions.env = env;
+    }
+  };
+
   // This task only starts a single hoodie server. We will keep a reference to
   // the child process here.
   var child;
