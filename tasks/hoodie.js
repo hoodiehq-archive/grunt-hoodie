@@ -93,7 +93,7 @@ module.exports = function (grunt) {
       done();
     });
 
-    child.once('error', function (err) {
+    child.on('error', function (err) {
       grunt.log.error(err);
     });
     child.once('exit', function (code, signal) {
