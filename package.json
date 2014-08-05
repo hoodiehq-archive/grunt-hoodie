@@ -1,7 +1,7 @@
 {
   "name": "grunt-hoodie",
   "description": "Start hoodie and delay grunting till it is ready.",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "homepage": "https://github.com/hoodiehq/grunt-hoodie",
   "author": {
     "name": "Robert Katzki",
@@ -28,8 +28,7 @@
   "scripts": {
     "test": "grunt ci --verbose"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
@@ -41,5 +40,5 @@
     "hoodie",
     "nobackend"
   ],
-  "codename": "dandy-fly"
+  "codename": "exquisite-gorilla"
 }
