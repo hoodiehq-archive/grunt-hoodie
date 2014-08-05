@@ -7,7 +7,6 @@
  */
 
 var fork = require('child_process').fork;
-var kill = require('tree-kill');
 
 // hoodie server start script.
 var bin = 'node_modules/hoodie-server/bin/start';
@@ -55,7 +54,7 @@ module.exports = function (grunt) {
   function killChild() {
     if (!child || killed) { return; }
     killed = true;
-    kill(child.pid, 'SIGTERM');
+    child.kill();
     grunt.log.ok('Killed ' + child.name + '.');
   }
 

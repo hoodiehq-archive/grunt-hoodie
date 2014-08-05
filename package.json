@@ -29,7 +29,6 @@
     "test": "grunt ci --verbose"
   },
   "dependencies": {
-    "tree-kill": "0.0.6"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
