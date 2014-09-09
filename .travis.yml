@@ -20,3 +20,7 @@ deploy:
     tags: true
   api_key:
     secure: VI0sSbdC0kxrdU4a7wtUTzybLZBT7vVOTdhQTzzEWWJGEH36bFyej9eUuIhchrl4yLtgUtA2n7B5Sddwbio44QOqYPWv6h2MOv8hRid9pFS/NynZTbbq0cV1N9wUcfymidtimHyG0m4ujc+eUNEjIZXQum+PERlvfWd9PhxgVpg=
+sudo: false
+cache:
+  directories:
+  - node_modules
