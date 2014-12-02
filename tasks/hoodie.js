@@ -98,6 +98,11 @@ module.exports = function (grunt) {
     child.once('exit', function (code, signal) {
       grunt.log.warn(child.name + ' exited. Code: ' + code + ' / Signal: ' + signal);
     });
+    if (child.stdout) {
+      child.stdout.on('data', function (buf) {
+        grunt.log.debug(buf);
+      });
+    }
     if (child.stderr) {
       child.stderr.on('data', function (buf) {
         grunt.log.error(buf);
